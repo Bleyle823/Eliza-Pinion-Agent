@@ -1,7 +1,7 @@
 {
     "name": "@elizaos/plugin-pinion",
     "description": "ElizaOS plugin for Pinion OS — x402 micropayment skills on Base (balance, price, tx, wallet, chat, send, trade, fund, broadcast, unlimited, pay-service)",
-    "version": "1.0.0",
+    "version": "1.7.3-beta.1",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -47,10 +47,10 @@
         "zod": "^3.22.0"
     },
     "devDependencies": {
-        "typescript": "^5.7.0",
         "@types/node": "^22.0.0",
+        "bun-types": "latest",
         "prettier": "^3.0.0",
-        "bun-types": "latest"
+        "typescript": "^5.7.0"
     },
     "agentConfig": {
         "pluginType": "elizaos:plugin:1.0.0",
