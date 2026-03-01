@@ -3,12 +3,12 @@ import type { DrizzleDB, Journal, JournalEntry } from '../types';
 import { getRow } from '../../types';
 
 export class JournalStorage {
-  constructor(private db: DrizzleDB) {}
+  constructor(private db: DrizzleDB) { }
 
   async loadJournal(pluginName: string): Promise<Journal | null> {
     const result = await this.db.execute(
       sql`SELECT version, dialect, entries 
-          FROM migrations._journal 
+          FROM "migrations"."_journal" 
           WHERE plugin_name = ${pluginName}`
     );
 
@@ -31,7 +31,7 @@ export class JournalStorage {
 
   async saveJournal(pluginName: string, journal: Journal): Promise<void> {
     await this.db.execute(
-      sql`INSERT INTO migrations._journal (plugin_name, version, dialect, entries)
+      sql`INSERT INTO "migrations"."_journal" (plugin_name, version, dialect, entries)
           VALUES (${pluginName}, ${journal.version}, ${journal.dialect}, ${JSON.stringify(journal.entries)}::jsonb)
           ON CONFLICT (plugin_name) 
           DO UPDATE SET 

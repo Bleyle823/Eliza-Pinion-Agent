@@ -20,8 +20,8 @@ export function parseCharacter(input: string | object | Character): Character {
     if (!validationResult.success) {
       const errorDetails = validationResult.error?.issues
         ? validationResult.error.issues
-            .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
-            .join('; ')
+          .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+          .join('; ')
         : validationResult.error?.message || 'Unknown validation error';
       throw new Error(`Character validation failed: ${errorDetails}`);
     }
@@ -112,9 +112,9 @@ export function buildCharacterPlugins(
     // Platform plugins
     ...(env.DISCORD_API_TOKEN?.trim() ? ['@elizaos/plugin-discord'] : []),
     ...(env.TWITTER_API_KEY?.trim() &&
-    env.TWITTER_API_SECRET_KEY?.trim() &&
-    env.TWITTER_ACCESS_TOKEN?.trim() &&
-    env.TWITTER_ACCESS_TOKEN_SECRET?.trim()
+      env.TWITTER_API_SECRET_KEY?.trim() &&
+      env.TWITTER_ACCESS_TOKEN?.trim() &&
+      env.TWITTER_ACCESS_TOKEN_SECRET?.trim()
       ? ['@elizaos/plugin-twitter']
       : []),
     ...(env.TELEGRAM_BOT_TOKEN?.trim() ? ['@elizaos/plugin-telegram'] : []),
@@ -126,11 +126,14 @@ export function buildCharacterPlugins(
       return shouldIgnore ? [] : ['@elizaos/plugin-bootstrap'];
     })(),
 
+    // Pinion OS (x402)
+    ...(env.PINION_PRIVATE_KEY?.trim() ? ['@elizaos/plugin-pinion'] : []),
+
     // Only include Ollama as fallback if no other LLM providers are configured
     ...(!env.ANTHROPIC_API_KEY?.trim() &&
-    !env.OPENROUTER_API_KEY?.trim() &&
-    !env.OPENAI_API_KEY?.trim() &&
-    !env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()
+      !env.OPENROUTER_API_KEY?.trim() &&
+      !env.OPENAI_API_KEY?.trim() &&
+      !env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()
       ? ['@elizaos/plugin-ollama']
       : []),
   ];

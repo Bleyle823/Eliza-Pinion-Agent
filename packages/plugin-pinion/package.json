@@ -1,0 +1,76 @@
+{
+    "name": "@elizaos/plugin-pinion",
+    "description": "ElizaOS plugin for Pinion OS — x402 micropayment skills on Base (balance, price, tx, wallet, chat, send, trade, fund, broadcast, unlimited, pay-service)",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "packageType": "plugin",
+    "platform": "node",
+    "license": "MIT",
+    "author": "elizaOS",
+    "keywords": [
+        "plugin",
+        "elizaos",
+        "pinion",
+        "x402",
+        "base",
+        "usdc",
+        "blockchain",
+        "payments"
+    ],
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "README.md",
+        "package.json"
+    ],
+    "scripts": {
+        "build": "bun run build.ts",
+        "dev": "elizaos dev",
+        "start": "elizaos start",
+        "lint": "prettier --write ./src",
+        "format": "prettier --write ./src"
+    },
+    "dependencies": {
+        "@elizaos/core": "workspace:*",
+        "ethers": "^6.11.0",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.0",
+        "@types/node": "^22.0.0",
+        "prettier": "^3.0.0",
+        "bun-types": "latest"
+    },
+    "agentConfig": {
+        "pluginType": "elizaos:plugin:1.0.0",
+        "pluginParameters": {
+            "PINION_PRIVATE_KEY": {
+                "type": "string",
+                "description": "Hex private key (0x...) with ETH (gas) and USDC on Base for x402 payments"
+            },
+            "PINION_API_KEY": {
+                "type": "string",
+                "description": "Unlimited API key (pk_...) to bypass per-call x402 payments"
+            },
+            "PINION_API_URL": {
+                "type": "string",
+                "description": "Override the Pinion skill server URL (default: https://pinionos.com/skill)"
+            },
+            "PINION_NETWORK": {
+                "type": "string",
+                "description": "Network: base (mainnet) or base-sepolia (testnet). Default: base"
+            }
+        }
+    }
+}
